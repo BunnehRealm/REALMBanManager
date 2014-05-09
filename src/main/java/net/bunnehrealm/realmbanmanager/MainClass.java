@@ -22,6 +22,7 @@ package net.bunnehrealm.realmbanmanager;
 import net.bunnehrealm.realmbanmanager.listeners.JoinListener;
 import net.bunnehrealm.realmbanmanager.utils.BanManager;
 import net.bunnehrealm.realmbanmanager.utils.CommandManager;
+import net.bunnehrealm.realmbanmanager.listeners.CommandListener;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
@@ -30,32 +31,33 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitScheduler;
 
 import java.io.File;
-
 public class MainClass extends JavaPlugin {
+
 	public int timer;
 	public MainClass MainClass;
 	public JoinListener jl = new JoinListener(this);
 	public BanManager bm = new BanManager(this);
+    public CommandListener cl = new CommandListener(this);
 	public File bansFile;
 	public FileConfiguration bans;
 
 	@Override
 	public void onDisable() {
-		bm.saveTime(timer);
-		getServer().getLogger().info("REALM Ban Manager has been disabled");
-	}
-
-	@Override
-	public void onEnable(){
-		getServer().getLogger().info("REALM Ban Manager has been enabled");
-		bansFile = new File(getDataFolder(), "bans.yml");
-		bans = new YamlConfiguration();
 
 			try {
 				firstBanRun();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+        bm.saveTime(timer);
+        getServer().getLogger().info("REALM Ban Manager has been disabled");
+    }
+
+    @Override
+    public void onEnable(){
+        getServer().getLogger().info("REALM Ban Manager has been enabled");
+        bansFile = new File(getDataFolder(), "bans.yml");
+        bans = new YamlConfiguration();
 			loadBans();
 
 			if(!(bans.contains("Timer"))){
@@ -64,6 +66,7 @@ public class MainClass extends JavaPlugin {
 
 			PluginManager pm = getServer().getPluginManager();
 			pm.registerEvents(jl, this);
+            pm.registerEvents(cl, this);
 
 			this.getCommand("ban").setExecutor(new CommandManager(this));
 

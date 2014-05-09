@@ -40,27 +40,7 @@ public class CommandManager implements CommandExecutor{
 
 	@Override
 	public boolean onCommand(CommandSender cs, Command cmd, String label,
-			String[] args) {
-			String string = cmd.getName();
-			if(string.equalsIgnoreCase("ban")){
-				if(!(args.length != 1) && !(args.length != 2)){
-					cs.sendMessage(ChatColor.RED + "Correct Usage: " + ChatColor.AQUA + "/ban <player> [reason]");
-					return false;
-				}
-				else{
-				if(cs.hasPermission("BanManager.ban") || cs.isOp() || !(cs instanceof Player)){
-					StringBuilder sb = new StringBuilder();
-					for(int x = 1; x < args.length; x++){
-						sb.append(" ").append(args[x]);
-					}
-					String ban_msg = sb.toString();
-					BanManager.Ban(MainClass.getServer().getPlayer(args[0]).getUniqueId().toString(), ban_msg);
-				}
-				else{
-					cs.sendMessage(ChatColor.RED + "You do not have permission to use this command!");
-				}
-			}
-			}
+			String[] args){
 		return false;
 	}
 	

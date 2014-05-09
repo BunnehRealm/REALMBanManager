@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="REALMBanManager:jar">
+    <output-path>$USER_HOME$/Downloads/Plugin Testing server/plugins</output-path>
+    <root id="archive" name="REALMBanManager.jar">
+      <element id="module-output" name="REALMBanManager" />
+    </root>
+  </artifact>
+</component>
