@@ -55,6 +55,7 @@ public class MainClass extends JavaPlugin {
 
     @Override
     public void onEnable(){
+    	MainClass = this;
         getServer().getLogger().info("REALM Ban Manager has been enabled");
         bansFile = new File(getDataFolder(), "bans.yml");
         bans = new YamlConfiguration();
@@ -67,8 +68,6 @@ public class MainClass extends JavaPlugin {
 			PluginManager pm = getServer().getPluginManager();
 			pm.registerEvents(jl, this);
             pm.registerEvents(cl, this);
-
-			this.getCommand("ban").setExecutor(new CommandManager(this));
 
 			timer = bm.loadTime();
 			BukkitScheduler bs = getServer().getScheduler();

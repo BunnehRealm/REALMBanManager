@@ -1,5 +1,5 @@
 /*
- *  REALMBanManager: Used for issuing and maintaing bans on bukkit server
+ *  REALMBanManager: Used for issuing and maintaining bans on bukkit server
     Copyright (C) 2014  Rory Finnegan
 
     This program is free software: you can redistribute it and/or modify
@@ -44,11 +44,11 @@ public class CommandListener implements Listener{
 
     @EventHandler
     public void onCommand(PlayerCommandPreprocessEvent e){
-
+    	BanManager bm = new BanManager(MainClass);
         Player cs = e.getPlayer();
         String cmd = e.getMessage();
         String[] args = cmd.split(" ");
-        if(cmd.startsWith("ban")){
+        if(cmd.startsWith("/ban")){
             e.setCancelled(true);
             if(!(args.length != 1) && !(args.length != 2)){
                 cs.sendMessage(ChatColor.RED + "Correct Usage: " + ChatColor.AQUA + "/ban <player> [reason]");
@@ -61,7 +61,7 @@ public class CommandListener implements Listener{
                         sb.append(" ").append(args[x]);
                     }
                     String ban_msg = sb.toString();
-                    BanManager.Ban(MainClass.getServer().getPlayer(args[0]).getUniqueId().toString(), ban_msg);
+                    bm.Ban(MainClass.getServer().getPlayer(args[0]).getUniqueId().toString(), ban_msg);
                 }
                 else{
                     cs.sendMessage(ChatColor.RED + "You do not have permission to use this command!");
