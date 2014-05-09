@@ -21,13 +21,17 @@
 package net.bunnehrealm.realmbanmanager.utils;
 
 import net.bunnehrealm.realmbanmanager.MainClass;
+import net.bunnehrealm.realmbanmanager.listeners.CommandListener;
 
 public class BanManager {
 
 	MainClass MainClass;
-
+	CommandListener CommandListener;
 	public BanManager(MainClass MainClass) {
 		this.MainClass = MainClass;
+	}
+	public BanManager(CommandListener CommandListener){
+		this.CommandListener = CommandListener;
 	}
 
 	public String getReason(String player_UUID) {
@@ -47,8 +51,7 @@ public class BanManager {
 	public void Ban(String player_UUID, String reason){
 		MainClass.loadBans();
 		MainClass.bans.set(player_UUID + ".permabanned", true);
-		MainClass.bans.set(player_UUID + ".reason", reason);
-		
+		MainClass.bans.set(player_UUID + ".reason", reason); 
 		MainClass.saveBans();
 	}
 

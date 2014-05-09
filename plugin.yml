@@ -1,0 +1,5 @@
+name: REALMBanManager
+main: net.bunnehrealm.realmbanmanager.MainClass
+version: 1.0
+description: >
+            Issue and Maintain bans.
